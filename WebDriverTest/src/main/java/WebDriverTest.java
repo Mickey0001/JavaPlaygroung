@@ -2,6 +2,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
 
 public class WebDriverTest
 {
@@ -15,7 +20,11 @@ public class WebDriverTest
 
         WebElement searchField = driver.findElement(By.id("sb_form_q"));
         searchField.sendKeys("Klingon babes");
+        //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         searchField.submit();
+
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Images")));
 
         WebElement imagesLink = driver.findElements(By.linkText("Images")).get(0);
         imagesLink.click();
@@ -25,5 +34,7 @@ public class WebDriverTest
         imageLink.click();
 
         driver.getPageSource().contains("Something");
+
+        driver.close();
     }
 }
