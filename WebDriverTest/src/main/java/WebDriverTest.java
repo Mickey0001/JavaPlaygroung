@@ -1,18 +1,19 @@
+import java.net.URL;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WebDriverTest
 {
-    public static  void main(String[] args)
-    {
-        System.setProperty("webdriver.chrome.driver", "C:/dev/tools/chromedriver.exe");
-
-        WebDriver driver = new ChromeDriver();
+    public static  void main(String[] args) throws Exception {
+//        System.setProperty("webdriver.chrome.driver", "C:/dev/tools/chromedriver.exe");
+        WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),
+             new DesiredCapabilities("firefox", "", Platform.WINDOWS));
 
         driver.get("https://bing.com");
 
